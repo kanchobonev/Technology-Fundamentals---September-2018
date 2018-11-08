@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _02.Articles
+{
+   
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            string[] input = Console.ReadLine()
+                .Split(',',' ');
+
+
+            string title = input[0];
+            string content = input[1];
+            string author = input[2];
+
+            Article article = new Article(title, content, author);
+
+            int n = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < n; i++)
+            {
+                string[] tokken = Console.ReadLine().Split(':',' ');
+                string command = tokken[0];
+                
+
+                if (command == "Edit")
+                {
+                    string newContent = tokken[1];
+
+                    article.Edit(newContent);
+                }
+
+                else if (command == "ChangeAuthor")
+                {
+                    string newAuthor = tokken[1];
+
+                    article.Edit(newAuthor);
+                    
+                }
+
+                else if (command == "Rename")
+                {
+                    string newName = tokken[1];
+
+                    article.Edit(newName);
+                   
+                }
+
+                
+            }
+            Console.WriteLine(article);
+        }
+        
+    }
+    class Article
+        {
+
+            public Article(string title, string content, string author)
+            {
+                Title = title;
+                Content = content;
+                Author = author;
+            }
+
+            public string Title { get; set; }
+
+            public string Content { get; set; }
+
+            public string Author { get; set; }
+
+
+            public void Edit(string newcontent)
+            {
+
+                Content = newcontent;
+            }
+
+            public void ChangeAuthor(string newauthor)
+            {
+                Author = newauthor;
+
+            }
+            public void Rename(string newtitle)
+            {
+                Title = newtitle;
+
+            }
+            
+            public override string ToString()
+            {
+                return $" {Title} - {Content}: {Author}";
+            }
+    }
+}
